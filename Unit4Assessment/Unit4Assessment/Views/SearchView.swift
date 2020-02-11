@@ -20,7 +20,7 @@ class SearchView: UIView {
   public lazy var collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .vertical
-    layout.itemSize = CGSize(width: 100, height: 230)
+    layout.itemSize = CGSize(width: 200, height: UIScreen.main.bounds.size.height * 0.35)
     let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
     cv.backgroundColor = .systemPink
     return cv

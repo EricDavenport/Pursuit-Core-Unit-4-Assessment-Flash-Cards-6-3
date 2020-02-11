@@ -32,6 +32,23 @@ class CardCell: UICollectionViewCell {
     button.addTarget(self, action: #selector(addPressed(_:)), for: .touchUpInside)
     return button
   }()
+  
+  public lazy var hintView : UILabel = {
+    let label = UILabel()
+    label.text = "hint"
+    label.backgroundColor = .orange
+    label.isHidden = true
+    return label
+  }()
+  
+  private lazy var doubleTapGesture: UITapGestureRecognizer = {
+    let gesture = UITapGestureRecognizer()
+    gesture.numberOfTapsRequired = 2
+    gesture.addTarget(self, action: #selector(gestureAction))
+    return gesture
+  }()
+  
+  private var hintsVisible = false
     
   override init(frame: CGRect) {
     super.init(frame: UIScreen.main.bounds)
@@ -42,16 +59,36 @@ class CardCell: UICollectionViewCell {
     super.init(coder: coder)
     commonInit()
   }
-  
-  public func configureCell(with card: Cards) {
-    titleLabel.text = card.quizTitle
-    currentCard = card
-  }
+
   
   private func commonInit() {
     setupAddButton()
     titleLabelSetup()
+    hintLabelSetup()
+    addGestureRecognizer(doubleTapGesture)
+    self.isUserInteractionEnabled = true
   }
+  
+  @objc private func gestureAction() {
+    hintsVisible.toggle()
+    animate()
+  }
+  
+  private func animate() {
+    
+    if hintsVisible {
+      UIView.transition(with: self, duration: 0.8, options: [.transitionFlipFromLeft], animations: {
+        self.hintView.isHidden = false
+        self.titleLabel.isHidden = true
+      }, completion: nil)
+    } else {
+      UIView.transition(with: self, duration: 0.8, options: [.transitionFlipFromRight], animations: {
+        self.hintView.isHidden = true
+        self.titleLabel.isHidden = false
+      }, completion: nil)
+    }
+  }
+  
   
   @objc private func addPressed(_ sender: UIButton) {
     delegate?.addButtonPressed(self, card: currentCard)
@@ -77,5 +114,23 @@ class CardCell: UICollectionViewCell {
     ])
   }
   
+  private func hintLabelSetup() {
+    addSubview(hintView)
+    hintView.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      hintView.topAnchor.constraint(equalTo: addButton.bottomAnchor),
+      hintView.centerXAnchor.constraint(equalTo: centerXAnchor),
+      hintView.centerYAnchor.constraint(equalTo: centerYAnchor),
+      hintView.leadingAnchor.constraint(equalTo: leadingAnchor),
+      hintView.trailingAnchor.constraint(equalTo: trailingAnchor),
+      hintView.heightAnchor.constraint(equalToConstant: 100)
+    ])
+  }
+  
+  public func configureCell(with card: Cards) {
+    titleLabel.text = card.quizTitle
+    hintView.text = card.facts[0]
+    currentCard = card
+  }
 
 }

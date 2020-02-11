@@ -13,7 +13,8 @@ class CardView: UIView {
   public lazy var collectionView : UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
-    layout.itemSize = CGSize(width: 100, height: 100)
+    layout.itemSize = CGSize(width: 200, height: 200)
+//    layout.minimumLineSpacing = 25
     let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
     cv.backgroundColor = .purple
     return cv

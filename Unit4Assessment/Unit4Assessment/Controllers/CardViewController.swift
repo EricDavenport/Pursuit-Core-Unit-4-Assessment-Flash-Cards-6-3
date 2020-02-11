@@ -59,7 +59,7 @@ extension CardViewController : UICollectionViewDataSource {
     let card = savedCards[indexPath.row]
     
     cell.configureCell(with: card)
-    cell.backgroundColor = .systemOrange
+    cell.backgroundColor = .brown
     return cell
   }
   
