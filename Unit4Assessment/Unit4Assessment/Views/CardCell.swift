@@ -44,7 +44,7 @@ class CardCell: UICollectionViewCell {
   }
   
   public func configureCell(with card: Cards) {
-    titleLabel.text = card.cardTitle
+    titleLabel.text = card.quizTitle
     currentCard = card
   }
   

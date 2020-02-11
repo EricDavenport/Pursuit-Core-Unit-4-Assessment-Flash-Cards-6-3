@@ -43,13 +43,10 @@ class SearchViewController: UIViewController {
   
   
   private func searchCards() {
-    CardSearchAPI.getCards{ [weak self] (result) in
-      switch result {
-      case .failure(let appError):
-        self?.showAlert(title: "Error", message: "Unable to load cards/n\(appError)")
-      case .success(let cards):
-        self?.cards = cards
-      }
+    do {
+      cards = try ParsingService.loadFlashCards()
+    } catch {
+      showAlert(title: "Unsuccessful", message: "Unable to load flash cards")
     }
   }
   
@@ -67,6 +64,7 @@ extension SearchViewController : UICollectionViewDataSource {
     let card = cards[indexPath.row]
     cell.backgroundColor = .white
     cell.configureCell(with: card)
+    cell.delegate = self
     return cell
   }
 }
@@ -78,5 +76,16 @@ extension SearchViewController : UICollectionViewDelegate {
 extension SearchViewController : CardCellDelegate {
   func addButtonPressed(_ cell: CardCell, card: Cards) {
     print("add button pressed")
+    
+
+      do {
+      try dataPersistence.createItem(card)
+        showAlert(title: "Success", message: "Flash card saved!")
+      } catch {
+        showAlert(title: "Failure", message: "Unable to save flash card. Try Again.")
+      }
+      print("saved")
+    }
+
   }
-}
+

@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct CardSearch : Codable & Equatable {
-  let cards : [Cards]
-}
+//struct CardSearch : Codable & Equatable {
+//  let cards : [Cards]
+//}
 
 struct Cards : Codable & Equatable {
   let id : String?
-  let cardTitle : String
+  let quizTitle : String
   let facts : [String]
 }
 

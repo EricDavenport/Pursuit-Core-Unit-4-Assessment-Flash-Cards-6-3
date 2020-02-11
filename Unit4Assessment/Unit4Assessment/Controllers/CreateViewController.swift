@@ -34,9 +34,10 @@ class CreateViewController: UIViewController {
   }
   
   @objc private func createButtonPressed() {
-    let thisCard = Cards(id: "", cardTitle: createView.titleTextField.text!, facts: [createView.firstHint.text!, createView.secondHint.text!])
+    let thisCard = Cards(id: "", quizTitle: createView.titleTextField.text!, facts: [createView.firstHint.text!, createView.secondHint.text!])
     do {
     try dataPersistence.createItem(thisCard)
+      showAlert(title: "Success", message: "Flash card saved!")
     } catch {
       showAlert(title: "Failure", message: "Unable to save flash card. Try Again.")
     }
@@ -59,14 +60,5 @@ class CreateViewController: UIViewController {
     present(alertController, animated: true)
     
   }
-  
-//  let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-//  let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (alertAction) in
-//    // TODO: write a delete helper function
-//    self.deleteArticle(article)
-//  }
-
-  
-    
 
 }
