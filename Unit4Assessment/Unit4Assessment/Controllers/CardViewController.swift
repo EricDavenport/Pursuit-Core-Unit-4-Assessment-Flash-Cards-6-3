@@ -61,12 +61,26 @@ extension CardViewController : UICollectionViewDataSource {
     
     cell.configureCell(with: card)
     cell.backgroundColor = .brown
+    cell.delegate = self
     return cell
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return savedCards.count
   }
+  
+  private func deleteCard(_ card: Cards) {
+    guard let index = savedCards.firstIndex(of: card) else {
+      return
+    }
+    do {
+      try dataPersistence.deleteItem(at: index)
+      loadSavedCards()
+    } catch {
+      loadSavedCards()
+    }
+  }
+
 }
 
 extension CardViewController : UICollectionViewDelegateFlowLayout {
@@ -78,3 +92,45 @@ extension CardViewController : UICollectionViewDelegateFlowLayout {
     
   }
 }
+
+extension CardViewController : CardCellDelegate {
+func addButtonPressed(_ cell: CardCell, card: Cards) {
+  print("delete button pressed")
+  
+  let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+  let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+  let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
+    self.deleteCard(card)
+  }
+  
+  alertController.addAction(cancelAction)
+  alertController.addAction(deleteAction)
+  present(alertController, animated: true)
+   
+
+}
+}
+
+
+//
+//extension SavedArticleViewController : SavedArticleCellDelegate {
+//  func didSelectMoreButton(_ savedArticleCell: SavedArticleCell, article: Article) {
+//    print("didSelectMoreButton \(article.title)")
+//
+//    // create an action sheet
+//    // cancel action
+//    // delete action
+//    // post MVP shareAction
+//    let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+//    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+//    let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (alertAction) in
+//      // TODO: write a delete helper function
+//      self.deleteArticle(article)
+//    }
+//    alertController.addAction(cancelAction)
+//    alertController.addAction(deleteAction)
+//    present(alertController, animated: true)
+//  }
+//
+//
+//}

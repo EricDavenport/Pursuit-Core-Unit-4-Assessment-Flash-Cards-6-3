@@ -29,7 +29,7 @@ class SearchViewController: UIViewController {
   
   override func loadView() {
     view = searchView
-
+    
   }
   
   
@@ -39,7 +39,7 @@ class SearchViewController: UIViewController {
     searchView.collectionView.dataSource = self
     searchView.collectionView.delegate = self
     searchView.collectionView.register(CardCell.self, forCellWithReuseIdentifier: "searchCell")
-          searchCards()
+    searchCards()
   }
   
   
@@ -70,25 +70,21 @@ extension SearchViewController : UICollectionViewDataSource {
   }
 }
 
-extension SearchViewController : UICollectionViewDelegate {
-  
-}
-
 extension SearchViewController : CardCellDelegate {
   func addButtonPressed(_ cell: CardCell, card: Cards) {
     print("add button pressed")
     
-
-      do {
+    
+    do {
       try dataPersistence.createItem(card)
-        showAlert(title: "Success", message: "Flash card saved!")
-      } catch {
-        showAlert(title: "Failure", message: "Unable to save flash card. Try Again.")
-      }
-      print("saved")
+      showAlert(title: "Success", message: "Flash card saved!")
+    } catch {
+      showAlert(title: "Failure", message: "Unable to save flash card. Try Again.")
     }
-
+    print("saved")
   }
+  
+}
 
 extension SearchViewController : UISearchBarDelegate {
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -100,7 +96,7 @@ extension SearchViewController : UISearchBarDelegate {
       $0.quizTitle.lowercased().contains(searchText.lowercased())
     }
     
-
+    
   }
 }
 
@@ -111,6 +107,6 @@ extension SearchViewController : UICollectionViewDelegateFlowLayout {
     viewController.facts = card.facts
     
     navigationController?.pushViewController(viewController, animated: true)
-        
+    
   }
 }

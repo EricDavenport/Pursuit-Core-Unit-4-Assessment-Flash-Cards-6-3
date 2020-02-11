@@ -28,7 +28,7 @@ class CardCell: UICollectionViewCell {
   
   public lazy var addButton : UIButton = {
     let button = UIButton()
-    button.setImage(UIImage(systemName: "rectangle.stack.badge.plus"), for: .normal)
+    button.setImage(UIImage(systemName: "ellipsis.circle"), for: .normal)
     button.addTarget(self, action: #selector(addPressed(_:)), for: .touchUpInside)
     return button
   }()
