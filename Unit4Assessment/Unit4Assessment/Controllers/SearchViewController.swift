@@ -51,13 +51,6 @@ class SearchViewController: UIViewController {
     }
   }
   
-  private func noDuplicates(_ card: Cards, _ cell: CardCell) {
-    if dataPersistence.hasItemBeenSaved(card) {
-      cell.addButton.isEnabled = false
-      cell.addButton.isHidden = true
-    }
-  }
-  
 }
 
 extension SearchViewController : UICollectionViewDataSource {
@@ -73,7 +66,6 @@ extension SearchViewController : UICollectionViewDataSource {
     cell.backgroundColor = .white
     cell.configureCell(with: card)
     cell.delegate = self
-//    noDuplicates(card, cell)
     return cell
   }
 }

@@ -82,13 +82,6 @@ extension CardViewController : UICollectionViewDataSource {
       loadSavedCards()
     }
   }
-  
-  private func removeDuplicates(card: Cards) {
-//    if dataPersistence.hasItemBeenSaved(card) {
-//      dataPersistence.deleteItem(at: savedCards[])
-//    }
-  }
-  
 
 
 }

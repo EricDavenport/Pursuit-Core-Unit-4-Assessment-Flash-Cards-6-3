@@ -35,22 +35,32 @@ class CreateViewController: UIViewController {
   
   @objc private func createButtonPressed() {
     let thisCard = Cards(id: "", quizTitle: (createView.titleTextField.text)!, facts: [createView.firstHint.text!, createView.secondHint.text!])
-        
-    if createView.firstHint.text != nil && createView.titleLabel.text != nil {
-    do {
-      if createView.firstHint.text != nil && createView.titleLabel.text != nil {
-    try dataPersistence.createItem(thisCard)
-      showAlert(title: "Success", message: "Flash card saved!")
-      } else {
-        if createView.firstHint.text == nil {
-        showAlert(title: "Failure", message: "At least 1 Hint Required")
-        } else if createView.titleTextField.text == nil {
-          showAlert(title: "Failure", message: "Title Required")
-        }
+//
+//    if createView.firstHint.text != nil && createView.titleLabel.text != nil {
+//    do {
+//      if createView.firstHint.text != nil && createView.titleLabel.text != nil {
+//    try dataPersistence.createItem(thisCard)
+//      showAlert(title: "Success", message: "Flash card saved!")
+//      } else {
+//        if createView.firstHint.text == nil {
+//        showAlert(title: "Failure", message: "At least 1 Hint Required")
+//        } else if createView.titleTextField.text == nil {
+//          showAlert(title: "Failure", message: "Title Required")
+//        }
+//      }
+//    } catch {
+//      showAlert(title: "Failure", message: "Unable to save flash card. Try Again.")
+//    }
+//    }
+    if thisCard.quizTitle == "" || thisCard.facts.isEmpty {
+      showAlert(title: "Failure", message: "Title and at least one hint required")
+    } else {
+      do {
+        try dataPersistence.createItem(thisCard)
+        showAlert(title: "Success", message: "Flash card saved!")
+      } catch {
+        showAlert(title: "Failure", message: "Unable to save flash card. Try Again.")
       }
-    } catch {
-      showAlert(title: "Failure", message: "Unable to save flash card. Try Again.")
-    }
     }
     print("create")
   }
