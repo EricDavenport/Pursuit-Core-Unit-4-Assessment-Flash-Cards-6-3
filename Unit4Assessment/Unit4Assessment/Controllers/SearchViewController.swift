@@ -22,6 +22,10 @@ class SearchViewController: UIViewController {
     }
   }
 
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+    searchCards()
+  }
   
   override func loadView() {
     view = searchView
@@ -33,8 +37,8 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
       searchView.collectionView.dataSource = self
       searchView.collectionView.delegate = self
-      searchView.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "searchCell")
-      searchCards()
+      searchView.collectionView.register(CardCell.self, forCellWithReuseIdentifier: "searchCell")
+//      searchCards()
     }
   
   
@@ -53,14 +57,16 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController : UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 25
+    return cards.count
   }
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "searchCell", for: indexPath)
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "searchCell", for: indexPath) as? CardCell else {
+      fatalError("unable to downcast to card cell")
+    }
     
-//    let card = cards[indexPath.row]
+    let card = cards[indexPath.row]
     cell.backgroundColor = .white
-    
+    cell.configureCell(with: card)
     return cell
   }
 }
