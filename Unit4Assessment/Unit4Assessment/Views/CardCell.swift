@@ -8,12 +8,20 @@
 
 import UIKit
 
+protocol CardCellDelegate: AnyObject {
+  func addButtonPressed(_ cell: CardCell, card: Cards )
+}
+
 class CardCell: UICollectionViewCell {
+  
+  weak var delegate: CardCellDelegate?
+  private var currentCard: Cards!
   
   public lazy var titleLabel : UILabel = {
     let label = UILabel()
     label.text = "Card Title Here"
     label.backgroundColor = .systemTeal
+    label.textAlignment = .center
     label.numberOfLines = 0
     return label
   }()
@@ -21,6 +29,7 @@ class CardCell: UICollectionViewCell {
   public lazy var addButton : UIButton = {
     let button = UIButton()
     button.setImage(UIImage(systemName: "rectangle.stack.badge.plus"), for: .normal)
+    button.addTarget(self, action: #selector(addPressed(_:)), for: .touchUpInside)
     return button
   }()
     
@@ -36,6 +45,7 @@ class CardCell: UICollectionViewCell {
   
   public func configureCell(with card: Cards) {
     titleLabel.text = card.cardTitle
+    currentCard = card
   }
   
   private func commonInit() {
@@ -43,12 +53,16 @@ class CardCell: UICollectionViewCell {
     titleLabelSetup()
   }
   
+  @objc private func addPressed(_ sender: UIButton) {
+    delegate?.addButtonPressed(self, card: currentCard)
+  }
+  
   private func setupAddButton() {
     addSubview(addButton)
     addButton.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
-      addButton.topAnchor.constraint(equalTo: topAnchor),
-      addButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -8)
+      addButton.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+      addButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
     ])
   }
   
@@ -58,8 +72,8 @@ class CardCell: UICollectionViewCell {
     NSLayoutConstraint.activate([
       titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
       titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-      titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -8),
-      titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 8)
+      titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+      titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
     ])
   }
   

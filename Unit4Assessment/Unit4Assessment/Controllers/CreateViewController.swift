@@ -20,10 +20,51 @@ class CreateViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      view.backgroundColor = .systemGroupedBackground
+      navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .done, target: self, action: #selector(createButtonPressed))
+      
+      navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonPressed))
       
     }
+  
+  
+  @objc private func cancelButtonPressed() {
+    print("cancel")
+    clearAll()
+  }
+  
+  @objc private func createButtonPressed() {
+    let thisCard = Cards(id: "", cardTitle: createView.titleTextField.text!, facts: [createView.firstHint.text!, createView.secondHint.text!])
+    do {
+    try dataPersistence.createItem(thisCard)
+    } catch {
+      showAlert(title: "Failure", message: "Unable to save flash card. Try Again.")
+    }
+    print("create")
+  }
+  
+  
+  
+  private func clearAll() {
+    let alertController = UIAlertController(title: "Are your sure", message: "All data inputted will be removed", preferredStyle: .alert)
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+    let okAction = UIAlertAction(title: "OK", style: .destructive) { (action) in
+      self.createView.titleTextField.text = ""
+      self.createView.firstHint.text = ""
+      self.createView.secondHint.text = ""
+    }
+    alertController.addAction(cancelAction)
+    alertController.addAction(okAction)
     
+    present(alertController, animated: true)
+    
+  }
+  
+//  let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+//  let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (alertAction) in
+//    // TODO: write a delete helper function
+//    self.deleteArticle(article)
+//  }
 
   
     

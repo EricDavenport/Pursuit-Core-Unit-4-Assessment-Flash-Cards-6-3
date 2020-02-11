@@ -10,7 +10,7 @@ import Foundation
 import NetworkHelper
 
 struct CardSearchAPI {
-  static func getCards(for query: String, completion: @escaping (Result<[Cards], AppError>) -> ()) {
+  static func getCards(completion: @escaping (Result<[Cards], AppError>) -> ()) {
     let endpointString = "https://5daf8b36f2946f001481d81c.mockapi.io/api/v2/cards"
     
     guard let url = URL(string: endpointString) else {

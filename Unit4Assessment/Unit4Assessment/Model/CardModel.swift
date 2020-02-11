@@ -13,7 +13,7 @@ struct CardSearch : Codable & Equatable {
 }
 
 struct Cards : Codable & Equatable {
-  let id : String
+  let id : String?
   let cardTitle : String
   let facts : [String]
 }

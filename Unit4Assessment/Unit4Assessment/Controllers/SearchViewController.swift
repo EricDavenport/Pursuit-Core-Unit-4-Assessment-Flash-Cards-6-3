@@ -21,7 +21,7 @@ class SearchViewController: UIViewController {
       }
     }
   }
-
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     searchCards()
@@ -29,21 +29,21 @@ class SearchViewController: UIViewController {
   
   override func loadView() {
     view = searchView
+
   }
   
-
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      searchView.collectionView.dataSource = self
-      searchView.collectionView.delegate = self
-      searchView.collectionView.register(CardCell.self, forCellWithReuseIdentifier: "searchCell")
-//      searchCards()
-    }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    searchView.collectionView.dataSource = self
+    searchView.collectionView.delegate = self
+    searchView.collectionView.register(CardCell.self, forCellWithReuseIdentifier: "searchCell")
+          searchCards()
+  }
   
   
   private func searchCards() {
-    CardSearchAPI.getCards(for: "") { [weak self] (result) in
+    CardSearchAPI.getCards{ [weak self] (result) in
       switch result {
       case .failure(let appError):
         self?.showAlert(title: "Error", message: "Unable to load cards/n\(appError)")
@@ -52,7 +52,7 @@ class SearchViewController: UIViewController {
       }
     }
   }
-
+  
 }
 
 extension SearchViewController : UICollectionViewDataSource {
@@ -71,6 +71,12 @@ extension SearchViewController : UICollectionViewDataSource {
   }
 }
 
-extension SearchViewController : UICollectionViewDelegateFlowLayout {
+extension SearchViewController : UICollectionViewDelegate {
   
+}
+
+extension SearchViewController : CardCellDelegate {
+  func addButtonPressed(_ cell: CardCell, card: Cards) {
+    print("add button pressed")
+  }
 }
