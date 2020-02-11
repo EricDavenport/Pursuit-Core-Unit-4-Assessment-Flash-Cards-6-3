@@ -47,7 +47,7 @@ extension FactsViewController : UICollectionViewDataSource {
     
     cell.currentHint = hint
     cell.backgroundColor = .white
-    cell.configureCell(hint)
+    cell.configureCell(hint, number: (indexPath.row))
     
     return cell
   }

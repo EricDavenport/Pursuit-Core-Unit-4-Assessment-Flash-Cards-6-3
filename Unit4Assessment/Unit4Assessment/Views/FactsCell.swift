@@ -64,7 +64,8 @@ class FactsCell: UICollectionViewCell {
     ])
   }
   
-  public func configureCell(_ hints: String) {
+  public func configureCell(_ hints: String, number: Int) {
     hintLabel.text = currentHint
+    titleLabel.text = "Hint \(number + 1)"
   }
 }
