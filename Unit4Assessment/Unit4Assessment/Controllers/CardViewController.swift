@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import  DataPersistence
 
 class CardViewController: UIViewController {
   
   private let cardView = CardView()
+  
+  public var dataPersistence : DataPersistence<Cards>!
   
   override func loadView() {
     view = cardView
