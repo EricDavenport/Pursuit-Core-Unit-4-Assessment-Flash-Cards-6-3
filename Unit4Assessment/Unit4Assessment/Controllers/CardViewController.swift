@@ -36,6 +36,7 @@ class CardViewController: UIViewController {
       cardView.collectionView.dataSource = self
       cardView.collectionView.delegate = self
       cardView.collectionView.register(CardCell.self, forCellWithReuseIdentifier: "cardCell")
+      
       loadSavedCards()
     }
   
@@ -47,6 +48,7 @@ class CardViewController: UIViewController {
     }
   }
     
+
 
 
 }
@@ -80,6 +82,14 @@ extension CardViewController : UICollectionViewDataSource {
       loadSavedCards()
     }
   }
+  
+  private func removeDuplicates(card: Cards) {
+//    if dataPersistence.hasItemBeenSaved(card) {
+//      dataPersistence.deleteItem(at: savedCards[])
+//    }
+  }
+  
+
 
 }
 
@@ -112,25 +122,4 @@ func addButtonPressed(_ cell: CardCell, card: Cards) {
 }
 
 
-//
-//extension SavedArticleViewController : SavedArticleCellDelegate {
-//  func didSelectMoreButton(_ savedArticleCell: SavedArticleCell, article: Article) {
-//    print("didSelectMoreButton \(article.title)")
-//
-//    // create an action sheet
-//    // cancel action
-//    // delete action
-//    // post MVP shareAction
-//    let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-//    let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (alertAction) in
-//      // TODO: write a delete helper function
-//      self.deleteArticle(article)
-//    }
-//    alertController.addAction(cancelAction)
-//    alertController.addAction(deleteAction)
-//    present(alertController, animated: true)
-//  }
-//
-//
-//}
+

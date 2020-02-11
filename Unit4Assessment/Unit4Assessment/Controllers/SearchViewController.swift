@@ -51,6 +51,13 @@ class SearchViewController: UIViewController {
     }
   }
   
+  private func noDuplicates(_ card: Cards, _ cell: CardCell) {
+    if dataPersistence.hasItemBeenSaved(card) {
+      cell.addButton.isEnabled = false
+      cell.addButton.isHidden = true
+    }
+  }
+  
 }
 
 extension SearchViewController : UICollectionViewDataSource {
@@ -66,6 +73,7 @@ extension SearchViewController : UICollectionViewDataSource {
     cell.backgroundColor = .white
     cell.configureCell(with: card)
     cell.delegate = self
+//    noDuplicates(card, cell)
     return cell
   }
 }
@@ -73,7 +81,9 @@ extension SearchViewController : UICollectionViewDataSource {
 extension SearchViewController : CardCellDelegate {
   func addButtonPressed(_ cell: CardCell, card: Cards) {
     print("add button pressed")
-    
+    if dataPersistence.hasItemBeenSaved(card) {
+      showAlert(title: "Error", message: "Card has already been saved")
+    } else {
     
     do {
       try dataPersistence.createItem(card)
@@ -83,7 +93,7 @@ extension SearchViewController : CardCellDelegate {
     }
     print("saved")
   }
-  
+  }
 }
 
 extension SearchViewController : UISearchBarDelegate {
