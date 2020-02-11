@@ -93,7 +93,6 @@ extension SearchViewController : CardCellDelegate {
 extension SearchViewController : UISearchBarDelegate {
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     guard !searchText.isEmpty else {
-      // if text is empty reload all the articles
       searchCards()
       return
     }
@@ -101,10 +100,17 @@ extension SearchViewController : UISearchBarDelegate {
       $0.quizTitle.lowercased().contains(searchText.lowercased())
     }
     
-    // filter articles based on searchText
-//    newsArticles = newsArticles.filter {
-//      $0.title.lowercased().contains(searchText.lowercased()) }
-//    print(searchText)
-//    resignFirstResponder()
+
+  }
+}
+
+extension SearchViewController : UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let card = cards[indexPath.row]
+    let viewController = FactsViewController()
+    viewController.facts = card.facts
+    
+    navigationController?.pushViewController(viewController, animated: true)
+        
   }
 }

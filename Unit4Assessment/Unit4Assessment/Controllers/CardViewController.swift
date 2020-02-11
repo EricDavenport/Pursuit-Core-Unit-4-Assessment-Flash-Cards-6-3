@@ -74,21 +74,7 @@ extension CardViewController : UICollectionViewDelegateFlowLayout {
     let card = savedCards[indexPath.row]
     let viewController = FactsViewController()
     viewController.facts = card.facts
-//    viewController.dataPersistence = dataPersistence
     navigationController?.pushViewController(viewController, animated: true)
     
   }
 }
-
-
-
-//func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//   let article = newsArticles[indexPath.row]
-//   let articleDVC = ArticleDetailViewController()
-//   // TODO: after assessement we will be using initializers as dependency injection mechanisms
-//   articleDVC.article = article
-//
-//   // step 3: setting up data persistence and its delegate
-//   articleDVC.dataPersistence = dataPersistence
-//   navigationController?.pushViewController(articleDVC, animated: true)
-// }

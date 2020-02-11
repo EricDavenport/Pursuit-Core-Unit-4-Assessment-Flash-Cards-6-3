@@ -15,7 +15,7 @@ class FactsCell: UICollectionViewCell {
   public lazy var titleLabel : UILabel = {
     let label = UILabel()
     label.textAlignment = .center
-    label.text = "Hint 1"
+    label.text = "Fact"
     return label
   }()
   

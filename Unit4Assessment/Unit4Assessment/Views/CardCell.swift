@@ -123,7 +123,7 @@ class CardCell: UICollectionViewCell {
       hintView.centerYAnchor.constraint(equalTo: centerYAnchor),
       hintView.leadingAnchor.constraint(equalTo: leadingAnchor),
       hintView.trailingAnchor.constraint(equalTo: trailingAnchor),
-      hintView.heightAnchor.constraint(equalToConstant: 100)
+      hintView.heightAnchor.constraint(equalToConstant: 75)
     ])
   }
   
