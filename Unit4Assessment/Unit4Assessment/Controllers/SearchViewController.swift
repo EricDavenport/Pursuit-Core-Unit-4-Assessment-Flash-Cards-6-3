@@ -35,6 +35,7 @@ class SearchViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    searchView.searchBar.delegate = self
     searchView.collectionView.dataSource = self
     searchView.collectionView.delegate = self
     searchView.collectionView.register(CardCell.self, forCellWithReuseIdentifier: "searchCell")
@@ -89,3 +90,21 @@ extension SearchViewController : CardCellDelegate {
 
   }
 
+extension SearchViewController : UISearchBarDelegate {
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    guard !searchText.isEmpty else {
+      // if text is empty reload all the articles
+      searchCards()
+      return
+    }
+    cards = cards.filter {
+      $0.quizTitle.lowercased().contains(searchText.lowercased())
+    }
+    
+    // filter articles based on searchText
+//    newsArticles = newsArticles.filter {
+//      $0.title.lowercased().contains(searchText.lowercased()) }
+//    print(searchText)
+//    resignFirstResponder()
+  }
+}

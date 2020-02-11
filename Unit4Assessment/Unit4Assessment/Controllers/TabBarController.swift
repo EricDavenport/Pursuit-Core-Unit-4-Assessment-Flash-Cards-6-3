@@ -33,6 +33,8 @@ class TabBarController: UITabBarController {
     vc.dataPersistence = dataPersistence
     return vc
   }()
+  
+
 
     override func viewDidLoad() {
         super.viewDidLoad()

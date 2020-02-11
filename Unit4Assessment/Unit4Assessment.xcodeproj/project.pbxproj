@@ -26,6 +26,9 @@
 		585E8CAF23F30C2900FA624A /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585E8CAE23F30C2900FA624A /* SearchView.swift */; };
 		58F4EEE223F3430A00E0820A /* FlashCards.json in Resources */ = {isa = PBXBuildFile; fileRef = 58F4EEE123F3430A00E0820A /* FlashCards.json */; };
 		58F4EEE423F3436400E0820A /* JSONParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F4EEE323F3436400E0820A /* JSONParsing.swift */; };
+		58F4EEE623F356FD00E0820A /* FactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F4EEE523F356FD00E0820A /* FactView.swift */; };
+		58F4EEE823F3571300E0820A /* FactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F4EEE723F3571300E0820A /* FactsViewController.swift */; };
+		58F4EEEA23F35A1800E0820A /* FactsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F4EEE923F35A1800E0820A /* FactsCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,9 @@
 		585E8CAE23F30C2900FA624A /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		58F4EEE123F3430A00E0820A /* FlashCards.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FlashCards.json; sourceTree = "<group>"; };
 		58F4EEE323F3436400E0820A /* JSONParsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParsing.swift; sourceTree = "<group>"; };
+		58F4EEE523F356FD00E0820A /* FactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactView.swift; sourceTree = "<group>"; };
+		58F4EEE723F3571300E0820A /* FactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactsViewController.swift; sourceTree = "<group>"; };
+		58F4EEE923F35A1800E0820A /* FactsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactsCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +153,8 @@
 				585E8CA823F3091600FA624A /* CreateView.swift */,
 				585E8CAE23F30C2900FA624A /* SearchView.swift */,
 				585064EB23F31AC700C6194A /* CardCell.swift */,
+				58F4EEE523F356FD00E0820A /* FactView.swift */,
+				58F4EEE923F35A1800E0820A /* FactsCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -158,6 +166,7 @@
 				585E8CA423F3067A00FA624A /* CardViewController.swift */,
 				585E8CAA23F3092F00FA624A /* CreateViewController.swift */,
 				585E8CAC23F30C1800FA624A /* SearchViewController.swift */,
+				58F4EEE723F3571300E0820A /* FactsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -285,8 +294,11 @@
 				585064E823F311E800C6194A /* CardModel.swift in Sources */,
 				585E8CAB23F3092F00FA624A /* CreateViewController.swift in Sources */,
 				5790239823F2EE39000AA216 /* AppDelegate.swift in Sources */,
+				58F4EEEA23F35A1800E0820A /* FactsCell.swift in Sources */,
+				58F4EEE823F3571300E0820A /* FactsViewController.swift in Sources */,
 				585E8CAD23F30C1800FA624A /* SearchViewController.swift in Sources */,
 				585E8CA223F3054B00FA624A /* CardView.swift in Sources */,
+				58F4EEE623F356FD00E0820A /* FactView.swift in Sources */,
 				58F4EEE423F3436400E0820A /* JSONParsing.swift in Sources */,
 				585E8CA723F306D400FA624A /* TabBarController.swift in Sources */,
 				585064EA23F319A800C6194A /* UIViewController+Alerts.swift in Sources */,
