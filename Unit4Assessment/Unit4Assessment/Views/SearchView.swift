@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchView: UIView {
-
+  
   public lazy var searchBar: UISearchBar = {
     let sb = UISearchBar()
     sb.placeholder = "search cards"
@@ -22,10 +22,10 @@ class SearchView: UIView {
     layout.scrollDirection = .vertical
     layout.itemSize = CGSize(width: 200, height: UIScreen.main.bounds.size.height * 0.35)
     let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-    cv.backgroundColor = .systemPink
+    cv.backgroundColor = .systemGroupedBackground
     return cv
   }()
-
+  
   override init(frame: CGRect) {
     super.init(frame: UIScreen.main.bounds)
     commonInit()
@@ -61,6 +61,6 @@ class SearchView: UIView {
       collectionView.trailingAnchor.constraint(equalTo: trailingAnchor)
     ])
   }
-
-
+  
+  
 }

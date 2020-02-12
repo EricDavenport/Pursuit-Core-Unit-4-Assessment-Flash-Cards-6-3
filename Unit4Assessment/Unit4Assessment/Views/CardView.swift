@@ -15,11 +15,11 @@ class CardView: UIView {
     layout.scrollDirection = .horizontal
     layout.itemSize = CGSize(width: 200, height: 200)
     let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-    cv.backgroundColor = .purple
+    cv.backgroundColor = .systemGroupedBackground
     return cv
   }()
-
-
+  
+  
   override init(frame: CGRect) {
     super.init(frame: UIScreen.main.bounds)
     commonInit()
@@ -44,6 +44,6 @@ class CardView: UIView {
       collectionView.trailingAnchor.constraint(equalTo: trailingAnchor)
     ])
   }
-
-
+  
+  
 }

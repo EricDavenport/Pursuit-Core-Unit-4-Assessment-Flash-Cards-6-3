@@ -13,42 +13,36 @@ class CreateViewController: UIViewController {
   
   private let createView = CreateView()
   public var dataPersistence : DataPersistence<Cards>!
-//  public var newCard: Cards?
-  
   
   override func loadView() {
     view = createView
   }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      createView.firstHint.delegate = self
-      createView.secondHint.delegate = self
-      createView.titleTextField.delegate = self
-      view.backgroundColor = .systemGroupedBackground
-      navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .done, target: self, action: #selector(createButtonPressed))
-      
-      navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonPressed))
-      
-    }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    createView.firstHint.delegate = self
+    createView.secondHint.delegate = self
+    createView.titleTextField.delegate = self
+    view.backgroundColor = .systemGroupedBackground
+    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .done, target: self, action: #selector(createButtonPressed))
+    navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonPressed))
+  }
   
   
   @objc private func cancelButtonPressed() {
-    print("cancel")
-//    resignFirstResponder()
     clearAll()
   }
   
   @objc private func createButtonPressed() {
     var thisCard = Cards(id: "", quizTitle: "", facts: [""])
-    
+    thisCard.quizTitle = createView.titleTextField.text
+    thisCard.facts?.append(createView.firstHint.text!)
+    thisCard.facts?.append(createView.secondHint.text!)
     
     if (createView.titleTextField.text == nil || createView.firstHint.text == nil || createView.secondHint.text == nil) || (thisCard.quizTitle == "" || thisCard.facts == [""] ) {
       showAlert(title: "All Fields Required", message: "Please fill in all fields.")
     } else {
-      thisCard.quizTitle = createView.titleTextField.text
-      thisCard.facts?.append(createView.firstHint.text!)
-      thisCard.facts?.append(createView.secondHint.text!)
+      
       do {
         try dataPersistence.createItem(thisCard)
         showAlert(title: "Success", message: "Flash card created")
@@ -56,11 +50,8 @@ class CreateViewController: UIViewController {
         showAlert(title: "Failure", message: "Unable to create card")
       }
     }
-    
-    print("create")
+    clearAll()
   }
-  
-  
   
   private func clearAll() {
     let alertController = UIAlertController(title: "Are your sure", message: "All data inputted will be removed", preferredStyle: .alert)
@@ -74,13 +65,13 @@ class CreateViewController: UIViewController {
     alertController.addAction(okAction)
     
     present(alertController, animated: true)
-    
   }
-
 }
 
 extension CreateViewController : UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    resignFirstResponder()
+    textField.resignFirstResponder()
+    return true 
   }
+  
 }
