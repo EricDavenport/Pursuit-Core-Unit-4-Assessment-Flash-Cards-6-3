@@ -25,11 +25,11 @@ class CreateViewController: UIViewController {
     createView.titleTextField.delegate = self
     view.backgroundColor = .systemGroupedBackground
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .done, target: self, action: #selector(createButtonPressed))
-    navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonPressed))
+    navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(clearButtonPressed))
   }
   
   
-  @objc private func cancelButtonPressed() {
+  @objc private func clearButtonPressed() {
     clearAll()
   }
   
