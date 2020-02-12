@@ -13,7 +13,8 @@ class CreateViewController: UIViewController {
   
   private let createView = CreateView()
   public var dataPersistence : DataPersistence<Cards>!
-  public var newCard: Cards?
+//  public var newCard: Cards?
+  
   
   override func loadView() {
     view = createView
@@ -21,6 +22,9 @@ class CreateViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+      createView.firstHint.delegate = self
+      createView.secondHint.delegate = self
+      createView.titleTextField.delegate = self
       view.backgroundColor = .systemGroupedBackground
       navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .done, target: self, action: #selector(createButtonPressed))
       
@@ -36,36 +40,21 @@ class CreateViewController: UIViewController {
   }
   
   @objc private func createButtonPressed() {
-    newCard?.facts?.append(createView.firstHint.text!)
-//    let thisCard = Cards(id: "", quizTitle: (createView.titleTextField.text)!, facts: [createView.firstHint.text!, createView.secondHint.text!])
-//
-//    if createView.firstHint.text != nil && createView.titleLabel.text != nil {
-//    do {
-//      if createView.firstHint.text != nil && createView.titleLabel.text != nil {
-//    try dataPersistence.createItem(thisCard)
-//      showAlert(title: "Success", message: "Flash card saved!")
-//      } else {
-//        if createView.firstHint.text == nil {
-//        showAlert(title: "Failure", message: "At least 1 Hint Required")
-//        } else if createView.titleTextField.text == nil {
-//          showAlert(title: "Failure", message: "Title Required")
-//        }
-//      }
-//    } catch {
-//      showAlert(title: "Failure", message: "Unable to save flash card. Try Again.")
-//    }
-//    }
-    guard let thisCard = newCard else { return }
-    if thisCard.quizTitle != nil && thisCard.facts != nil {
+    var thisCard = Cards(id: "", quizTitle: "", facts: [""])
+    
+    
+    if (createView.titleTextField.text == nil || createView.firstHint.text == nil || createView.secondHint.text == nil) || (thisCard.quizTitle == "" || thisCard.facts == [""] ) {
+      showAlert(title: "All Fields Required", message: "Please fill in all fields.")
+    } else {
+      thisCard.quizTitle = createView.titleTextField.text
+      thisCard.facts?.append(createView.firstHint.text!)
+      thisCard.facts?.append(createView.secondHint.text!)
       do {
         try dataPersistence.createItem(thisCard)
-        showAlert(title: "Success", message: "Flash card saved!")
+        showAlert(title: "Success", message: "Flash card created")
       } catch {
-        showAlert(title: "Failure", message: "Unable to save flash card. Try Again.")
+        showAlert(title: "Failure", message: "Unable to create card")
       }
-
-    } else {
-      showAlert(title: "Failure", message: "Title and at least one hint required")
     }
     
     print("create")
@@ -88,4 +77,10 @@ class CreateViewController: UIViewController {
     
   }
 
+}
+
+extension CreateViewController : UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    resignFirstResponder()
+  }
 }
