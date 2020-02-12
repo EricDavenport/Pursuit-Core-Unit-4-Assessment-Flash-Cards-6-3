@@ -9,7 +9,7 @@
 import UIKit
 
 class FactView: UIView {
-
+  
   public lazy var collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .vertical
@@ -32,7 +32,7 @@ class FactView: UIView {
   private func commonInit() {
     collectionViewSetup()
   }
-
+  
   private func collectionViewSetup() {
     addSubview(collectionView)
     collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -43,5 +43,5 @@ class FactView: UIView {
       collectionView.trailingAnchor.constraint(equalTo: trailingAnchor)
     ])
   }
-
+  
 }

@@ -11,7 +11,7 @@ import UIKit
 class FactsCell: UICollectionViewCell {
   
   public var currentHint: String!
-    
+  
   public lazy var titleLabel : UILabel = {
     let label = UILabel()
     label.textAlignment = .center
@@ -40,7 +40,7 @@ class FactsCell: UICollectionViewCell {
     titleLabelConstraints()
     hintLabelContraints()
   }
-
+  
   
   private func titleLabelConstraints() {
     addSubview(titleLabel)

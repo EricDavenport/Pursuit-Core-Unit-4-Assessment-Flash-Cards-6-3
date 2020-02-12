@@ -59,8 +59,8 @@ class CreateView: UIView {
     tf.backgroundColor = .systemGray3
     return tf
   }()
-
- 
+  
+  
   override init(frame: CGRect) {
     super.init(frame: UIScreen.main.bounds)
     commonInit()
@@ -103,8 +103,7 @@ class CreateView: UIView {
   private func firstHintConstraints() {
     addSubview(firstHint)
     firstHint.translatesAutoresizingMaskIntoConstraints = false
-//    firstHint.heightAnchor.constraint(equalToConstant: 100).isActive = true
-
+    
     NSLayoutConstraint.activate([
       firstHint.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 20),
       firstHint.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
@@ -124,6 +123,6 @@ class CreateView: UIView {
     ])
   }
   
-
-
+  
+  
 }

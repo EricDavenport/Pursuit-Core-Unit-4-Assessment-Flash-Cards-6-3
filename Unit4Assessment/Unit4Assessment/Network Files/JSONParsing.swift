@@ -23,7 +23,7 @@ final class ParsingService {
     }
     do {
       let stocks = try JSONDecoder().decode([Cards].self, from: json)
-//      let results = stocks.cards
+      //      let results = stocks.cards
       return stocks
     } catch {
       throw ParsingServiceError.decodingError(error)

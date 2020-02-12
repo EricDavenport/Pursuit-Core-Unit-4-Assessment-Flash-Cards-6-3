@@ -24,14 +24,14 @@ class FactsViewController: UIViewController {
   override func loadView() {
     view = factsView
   }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      factsView.collectionView.dataSource = self
-      factsView.collectionView.register(FactsCell.self, forCellWithReuseIdentifier: "factsCell")
-    }
   
-
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    factsView.collectionView.dataSource = self
+    factsView.collectionView.register(FactsCell.self, forCellWithReuseIdentifier: "factsCell")
+  }
+  
+  
 }
 
 extension FactsViewController : UICollectionViewDataSource {

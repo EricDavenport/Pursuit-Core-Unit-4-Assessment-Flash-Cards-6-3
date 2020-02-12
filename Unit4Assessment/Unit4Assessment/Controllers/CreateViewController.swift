@@ -37,20 +37,22 @@ class CreateViewController: UIViewController {
     var thisCard = Cards(id: "", quizTitle: "", facts: [""])
     thisCard.quizTitle = createView.titleTextField.text
     thisCard.facts?.append(createView.firstHint.text!)
+    
+    if (createView.titleTextField.text == "" || createView.firstHint.text == "" || createView.secondHint.text == "") || (thisCard.quizTitle == "" || thisCard.facts == [""] ) {
+      showAlert(title: "All Fields Required", message: "Please fill in all fields.")
+    }
     thisCard.facts?.append(createView.secondHint.text!)
     
-    if (createView.titleTextField.text == nil || createView.firstHint.text == nil || createView.secondHint.text == nil) || (thisCard.quizTitle == "" || thisCard.facts == [""] ) {
-      showAlert(title: "All Fields Required", message: "Please fill in all fields.")
-    } else {
-      
-      do {
-        try dataPersistence.createItem(thisCard)
-        showAlert(title: "Success", message: "Flash card created")
-      } catch {
-        showAlert(title: "Failure", message: "Unable to create card")
-      }
+    do {
+      try dataPersistence.createItem(thisCard)
+      showAlert(title: "Success", message: "Flash card created")
+      clearAll()
+      return
+    } catch {
+      showAlert(title: "Failure", message: "Unable to create card")
+      clearAll()
+      return
     }
-    clearAll()
   }
   
   private func clearAll() {

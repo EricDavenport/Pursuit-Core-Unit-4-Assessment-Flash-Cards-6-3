@@ -37,15 +37,15 @@ class CardViewController: UIViewController {
   override func loadView() {
     view = cardView
   }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      cardView.collectionView.dataSource = self
-      cardView.collectionView.delegate = self
-      cardView.collectionView.register(CardCell.self, forCellWithReuseIdentifier: "cardCell")
-      
-      loadSavedCards()
-    }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    cardView.collectionView.dataSource = self
+    cardView.collectionView.delegate = self
+    cardView.collectionView.register(CardCell.self, forCellWithReuseIdentifier: "cardCell")
+    
+    loadSavedCards()
+  }
   
   private func loadSavedCards() {
     do {
@@ -54,7 +54,7 @@ class CardViewController: UIViewController {
       showAlert(title: "Error", message: "Issue loading saved flash cards")
     }
   }
-    
+  
 }
 
 extension CardViewController : UICollectionViewDataSource {
@@ -86,8 +86,8 @@ extension CardViewController : UICollectionViewDataSource {
       loadSavedCards()
     }
   }
-
-
+  
+  
 }
 
 extension CardViewController : UICollectionViewDelegateFlowLayout {
@@ -101,21 +101,21 @@ extension CardViewController : UICollectionViewDelegateFlowLayout {
 }
 
 extension CardViewController : CardCellDelegate {
-func addButtonPressed(_ cell: CardCell, card: Cards) {
-  print("delete button pressed")
-  
-  let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-  let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-  let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
-    self.deleteCard(card)
+  func addButtonPressed(_ cell: CardCell, card: Cards) {
+    print("delete button pressed")
+    
+    let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+    let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
+      self.deleteCard(card)
+    }
+    
+    alertController.addAction(cancelAction)
+    alertController.addAction(deleteAction)
+    present(alertController, animated: true)
+    
+    
   }
-  
-  alertController.addAction(cancelAction)
-  alertController.addAction(deleteAction)
-  present(alertController, animated: true)
-   
-
-}
 }
 
 

@@ -49,7 +49,7 @@ class CardCell: UICollectionViewCell {
   }()
   
   private var hintsVisible = false
-    
+  
   override init(frame: CGRect) {
     super.init(frame: UIScreen.main.bounds)
     commonInit()
@@ -59,7 +59,7 @@ class CardCell: UICollectionViewCell {
     super.init(coder: coder)
     commonInit()
   }
-
+  
   
   private func commonInit() {
     setupAddButton()
@@ -132,5 +132,5 @@ class CardCell: UICollectionViewCell {
     hintView.text = card.facts![0]
     currentCard = card
   }
-
+  
 }

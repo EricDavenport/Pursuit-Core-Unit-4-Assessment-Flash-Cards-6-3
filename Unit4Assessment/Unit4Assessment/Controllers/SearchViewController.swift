@@ -81,15 +81,15 @@ extension SearchViewController : CardCellDelegate {
     if dataPersistence.hasItemBeenSaved(card) {
       showAlert(title: "Error", message: "Card has already been saved")
     } else {
-    
-    do {
-      try dataPersistence.createItem(card)
-      showAlert(title: "Success", message: "Flash card saved!")
-    } catch {
-      showAlert(title: "Failure", message: "Unable to save flash card. Try Again.")
+      
+      do {
+        try dataPersistence.createItem(card)
+        showAlert(title: "Success", message: "Flash card saved!")
+      } catch {
+        showAlert(title: "Failure", message: "Unable to save flash card. Try Again.")
+      }
+      print("saved")
     }
-    print("saved")
-  }
   }
 }
 
