@@ -19,9 +19,16 @@ class CardViewController: UIViewController {
     didSet {
       DispatchQueue.main.async {
         self.cardView.collectionView.reloadData()
+        if self.savedCards.isEmpty {
+          self.cardView.collectionView.backgroundView = EmptyView(title: "Saved Cards", message: "No cards saved. Create using the middle icon.")
+        } else {
+          self.cardView.collectionView.backgroundView = nil
+        }
       }
     }
   }
+  
+  
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
@@ -48,9 +55,6 @@ class CardViewController: UIViewController {
     }
   }
     
-
-
-
 }
 
 extension CardViewController : UICollectionViewDataSource {

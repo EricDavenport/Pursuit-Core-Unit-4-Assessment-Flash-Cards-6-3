@@ -43,6 +43,7 @@ class EmptyView: UIView {
   
   private func commonInit() {
     headerLabelConstraints()
+    subHeaderLabelConstraints()
   }
   
   private func headerLabelConstraints() {
@@ -61,7 +62,7 @@ class EmptyView: UIView {
     addSubview(subHeaderLabel)
     subHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
-    subHeaderLabel.bottomAnchor.constraint(equalTo: headerLabel.topAnchor, constant: -8),
+    subHeaderLabel.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 8),
     subHeaderLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
     subHeaderLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
     ])

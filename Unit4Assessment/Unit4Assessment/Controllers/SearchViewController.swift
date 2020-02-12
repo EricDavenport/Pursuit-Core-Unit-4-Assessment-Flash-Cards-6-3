@@ -18,6 +18,11 @@ class SearchViewController: UIViewController {
     didSet {
       DispatchQueue.main.async {
         self.searchView.collectionView.reloadData()
+        if self.cards.isEmpty {
+          self.searchView.collectionView.backgroundView = EmptyView(title: "Error", message: "Unable to load flash cards")
+        } else {
+          self.searchView.collectionView.backgroundView = nil
+        }
       }
     }
   }
