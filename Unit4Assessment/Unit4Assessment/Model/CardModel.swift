@@ -13,8 +13,8 @@ import Foundation
 //}
 
 struct Cards : Codable & Equatable {
-  let id : String?
-  let quizTitle : String
-  let facts : [String]
+  var id : String?
+  var quizTitle : String?
+  var facts : [String]?
 }
 

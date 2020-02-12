@@ -13,6 +13,7 @@ class CreateViewController: UIViewController {
   
   private let createView = CreateView()
   public var dataPersistence : DataPersistence<Cards>!
+  public var newCard: Cards?
   
   override func loadView() {
     view = createView
@@ -30,11 +31,13 @@ class CreateViewController: UIViewController {
   
   @objc private func cancelButtonPressed() {
     print("cancel")
+//    resignFirstResponder()
     clearAll()
   }
   
   @objc private func createButtonPressed() {
-    let thisCard = Cards(id: "", quizTitle: (createView.titleTextField.text)!, facts: [createView.firstHint.text!, createView.secondHint.text!])
+    newCard?.facts?.append(createView.firstHint.text!)
+//    let thisCard = Cards(id: "", quizTitle: (createView.titleTextField.text)!, facts: [createView.firstHint.text!, createView.secondHint.text!])
 //
 //    if createView.firstHint.text != nil && createView.titleLabel.text != nil {
 //    do {
@@ -52,16 +55,19 @@ class CreateViewController: UIViewController {
 //      showAlert(title: "Failure", message: "Unable to save flash card. Try Again.")
 //    }
 //    }
-    if thisCard.quizTitle == "" || thisCard.facts.isEmpty {
-      showAlert(title: "Failure", message: "Title and at least one hint required")
-    } else {
+    guard let thisCard = newCard else { return }
+    if thisCard.quizTitle != nil && thisCard.facts != nil {
       do {
         try dataPersistence.createItem(thisCard)
         showAlert(title: "Success", message: "Flash card saved!")
       } catch {
         showAlert(title: "Failure", message: "Unable to save flash card. Try Again.")
       }
+
+    } else {
+      showAlert(title: "Failure", message: "Title and at least one hint required")
     }
+    
     print("create")
   }
   
@@ -71,9 +77,9 @@ class CreateViewController: UIViewController {
     let alertController = UIAlertController(title: "Are your sure", message: "All data inputted will be removed", preferredStyle: .alert)
     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
     let okAction = UIAlertAction(title: "OK", style: .destructive) { (action) in
-      self.createView.titleTextField.text = ""
-      self.createView.firstHint.text = ""
-      self.createView.secondHint.text = ""
+      self.createView.titleTextField.text = nil
+      self.createView.firstHint.text = nil
+      self.createView.secondHint.text = nil
     }
     alertController.addAction(cancelAction)
     alertController.addAction(okAction)

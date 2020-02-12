@@ -90,7 +90,7 @@ extension CardViewController : UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let card = savedCards[indexPath.row]
     let viewController = FactsViewController()
-    viewController.facts = card.facts
+    viewController.facts = card.facts!
     navigationController?.pushViewController(viewController, animated: true)
     
   }

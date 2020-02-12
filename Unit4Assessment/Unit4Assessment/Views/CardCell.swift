@@ -129,7 +129,7 @@ class CardCell: UICollectionViewCell {
   
   public func configureCell(with card: Cards) {
     titleLabel.text = card.quizTitle
-    hintView.text = card.facts[0]
+    hintView.text = card.facts![0]
     currentCard = card
   }
 

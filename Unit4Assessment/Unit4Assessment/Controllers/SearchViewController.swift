@@ -95,7 +95,7 @@ extension SearchViewController : UISearchBarDelegate {
       return
     }
     cards = cards.filter {
-      $0.quizTitle.lowercased().contains(searchText.lowercased())
+      $0.quizTitle!.lowercased().contains(searchText.lowercased())
     }
     
     
@@ -106,7 +106,7 @@ extension SearchViewController : UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let card = cards[indexPath.row]
     let viewController = FactsViewController()
-    viewController.facts = card.facts
+    viewController.facts = card.facts!
     
     navigationController?.pushViewController(viewController, animated: true)
     
